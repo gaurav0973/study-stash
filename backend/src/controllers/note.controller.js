@@ -6,11 +6,9 @@ import asyncHandler from "../utils/async-handler.js";
 
 // upload notes
 export const uploadNote = asyncHandler(async (req, res) => {
-  
-  
-//   console.log("Upload Note Controller reached");
-//   console.log("Request Body:", req.body);
-//   console.log("File:", req.file);
+  //   console.log("Upload Note Controller reached");
+  //   console.log("Request Body:", req.body);
+  //   console.log("File:", req.file);
 
   const { title, description, price } = req.body;
   const file = req.file;
@@ -22,7 +20,7 @@ export const uploadNote = asyncHandler(async (req, res) => {
     throw new ApiError(400, "File is required");
   }
 
-//   console.log("File path:", file.path);
+  //   console.log("File path:", file.path);
 
   const cloudinaryResult = await uploadOnCloudinary(file.path);
   if (!cloudinaryResult) {
@@ -44,7 +42,7 @@ export const uploadNote = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, note, "Note uploaded successfully"));
 });
 
-//get all notes 
+//get all notes
 export const getAllNotes = asyncHandler(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
@@ -57,11 +55,65 @@ export const getAllNotes = asyncHandler(async (req, res) => {
 
   const total = await Note.countDocuments();
 
-  return res.json(new ApiResponse(200, {
-    notes,
-    total,
-    page,
-    totalPages: Math.ceil(total / limit),
-  }, "All notes fetched"));
+  return res.json(
+    new ApiResponse(
+      200,
+      {
+        notes,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
+      },
+      "All notes fetched"
+    )
+  );
 });
 
+// Search notes by title
+export const searchNotesByTitle = asyncHandler(async (req, res) => {
+  const { title } = req.query;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  if (!title) throw new ApiError(400, "Title query is required");
+
+  const notes = await Note.find({
+    title: { $regex: title, $options: "i" },
+  })
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+
+  const total = await Note.countDocuments({
+    title: { $regex: title, $options: "i" },
+  });
+
+  if (notes.length === 0) {
+    return res.json(
+      new ApiResponse(
+        200,
+        {
+          notes: [],
+          total: 0,
+          page,
+          totalPages: 0,
+        },
+        "No notes found matching this title"
+      )
+    );
+  }
+
+  return res.json(
+    new ApiResponse(
+      200,
+      {
+        notes,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
+      },
+      "Notes matching title"
+    )
+  );
+});
