@@ -43,3 +43,25 @@ export const uploadNote = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(201, note, "Note uploaded successfully"));
 });
+
+//get all notes 
+export const getAllNotes = asyncHandler(async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  const notes = await Note.find()
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+
+  const total = await Note.countDocuments();
+
+  return res.json(new ApiResponse(200, {
+    notes,
+    total,
+    page,
+    totalPages: Math.ceil(total / limit),
+  }, "All notes fetched"));
+});
+
