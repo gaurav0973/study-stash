@@ -21,6 +21,8 @@ The backend provides a RESTful API for the frontend to interact with.
 - **Mongoose**: MongoDB object modeling for Node.js
 - **JWT**: JSON Web Tokens for authentication
 - **bcryptjs**: Library for hashing passwords
+- **Cloudinary**: Cloud service for storing and managing uploaded files
+- **Multer**: Middleware for handling multipart/form-data, used for file uploads
 
 ### Features Implemented
 
@@ -36,12 +38,20 @@ The backend provides a RESTful API for the frontend to interact with.
 - **User Profile**: Users can view their profile information
 - **JWT-based Authentication**: Secure authentication using JWT tokens stored in HTTP-only cookies
 
+#### Study Notes Management
+
+- **Upload Notes**: Users can upload study materials with title, description, price, and file attachment
+- **University Tagging**: Study materials are automatically tagged with the user's university
+- **File Storage**: Files are securely stored in Cloudinary cloud storage
+- **File Access Control**: Only authenticated users can access uploaded files
+
 #### API Structure
 
 - **RESTful API Design**: Well-structured API with proper routes and controllers
 - **Error Handling**: Custom error handling with ApiError class
 - **Response Formatting**: Standardized API responses with ApiResponse class
 - **Middleware**: Middleware for authentication and validation
+- **File Handling**: Multer middleware for file uploads
 
 ### API Endpoints
 
@@ -51,6 +61,7 @@ The backend provides a RESTful API for the frontend to interact with.
 | POST   | /api/v1/user/login      | Authenticate user and return token | No                      |
 | POST   | /api/v1/user/logout     | Logout user                        | Yes                     |
 | GET    | /api/v1/user/getProfile | Get user profile                   | Yes                     |
+| POST   | /api/v1/notes/upload    | Upload a new note                  | Yes                     |
 
 ## Frontend
 
@@ -71,6 +82,7 @@ _Note: The frontend is currently under development._
 - Node.js (v14 or higher)
 - MongoDB
 - npm or yarn
+- Cloudinary account
 
 ### Backend Setup
 
@@ -88,6 +100,9 @@ _Note: The frontend is currently under development._
    JWT_TOKEN_SECRET=your_secret_key
    JWT_TOKEN_EXPIRY=30d
    MONGODB_URI=your_mongodb_connection_string
+   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+   CLOUDINARY_API_KEY=your_cloudinary_api_key
+   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
    ```
 4. Start the server
    ```
@@ -102,11 +117,12 @@ _Coming soon_
 
 When testing the API endpoints, make sure to:
 
-1. Use the correct Content-Type header: `Content-Type: application/json`
-2. Include all required fields in the request body
-3. For protected routes, include the JWT token in the cookie
+1. Use the correct Content-Type header: `Content-Type: application/json` for JSON requests
+2. Use `multipart/form-data` for file uploads
+3. Include all required fields in the request body
+4. For protected routes, include the JWT token in the cookie
 
-Example for registration:
+### Example for User Registration:
 
 ```json
 {
@@ -117,11 +133,27 @@ Example for registration:
 }
 ```
 
+### Example for Note Upload:
+
+Using Postman:
+
+- Set request type to POST
+- URL: `http://localhost:3000/api/v1/notes/upload`
+- Authentication: Include authentication cookies
+- Body: Form-data with these fields:
+  - title: "Sample Note Title"
+  - description: "Detailed description about this note"
+  - price: "10"
+  - file: [Select a PDF or document file]
+
 ## Development Notes
 
 - The API uses HTTP-only cookies for storing JWT tokens to prevent XSS attacks
 - Password hashing is implemented with bcryptjs for security
 - Custom error handling is implemented for better error messages
+- File uploads are handled with Multer for temporary local storage
+- Files are stored permanently in Cloudinary cloud storage
+- Local temporary files are automatically deleted after upload
 
 ## Future Enhancements
 
@@ -130,3 +162,6 @@ Example for registration:
 - User roles and permissions
 - Advanced study material organization features
 - Real-time collaboration tools
+- Search functionality for study materials
+- Rating and review system for notes
+- Payment integration for premium content

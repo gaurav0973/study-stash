@@ -1,6 +1,8 @@
 function App() {
   return (
-    <div>App</div>
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      Application
+    </div>
   )
 }
 export default App
