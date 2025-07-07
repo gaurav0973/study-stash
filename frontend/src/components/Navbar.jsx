@@ -14,7 +14,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className="flex items-center gap-4">
-                        <Button variant="ghost">
+                        <Button>
                                 <Link to="/signin">Sign in</Link>
                         </Button>
                         <Button>

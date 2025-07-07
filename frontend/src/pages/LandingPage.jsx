@@ -17,7 +17,7 @@ const LandingPage = () => {
                 </h1>
                 <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
                     The first student-to-student marketplace built specifically for your campus. Buy and sell high-quality class
-                    notes, code, and study materials securely.
+                    notes and study materials securely.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button size="lg" className="text-lg px-8 py-6">
