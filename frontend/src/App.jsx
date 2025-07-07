@@ -1,9 +1,16 @@
+import { Routes, Route } from "react-router";
+import Navbar from "./components/Navbar";
+import LandingPage from "./pages/LandingPage";
+
 function App() {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      Application
-      hii there 
-    </div>
-  )
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </>
+  );
 }
-export default App
+
+export default App;
