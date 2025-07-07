@@ -117,3 +117,15 @@ export const searchNotesByTitle = asyncHandler(async (req, res) => {
     )
   );
 });
+
+
+// Get note by ID
+export const getNoteById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const note = await Note.findById(id).populate("uploadedBy", "username university");
+
+  if (!note) throw new ApiError(404, "Note not found");
+
+  return res.json(new ApiResponse(200, note, "Note fetched"));
+});
