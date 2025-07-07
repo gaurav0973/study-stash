@@ -118,14 +118,66 @@ export const searchNotesByTitle = asyncHandler(async (req, res) => {
   );
 });
 
-
 // Get note by ID
 export const getNoteById = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  const note = await Note.findById(id).populate("uploadedBy", "username university");
+  const note = await Note.findById(id).populate(
+    "uploadedBy",
+    "username university"
+  );
 
   if (!note) throw new ApiError(404, "Note not found");
 
   return res.json(new ApiResponse(200, note, "Note fetched"));
+});
+
+// Get notes by university
+export const getNotesByUniversity = asyncHandler(async (req, res) => {
+  const { university } = req.params;
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  if (!university) {
+    throw new ApiError(400, "University parameter is required");
+  }
+
+  const notes = await Note.find({ university })
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit)
+    .populate("uploadedBy", "username");
+
+  const total = await Note.countDocuments({ university });
+
+  if (notes.length === 0) {
+    return res.json(
+      new ApiResponse(
+        200,
+        {
+          notes: [],
+          total: 0,
+          page,
+          totalPages: 0,
+          university,
+        },
+        `No notes found from ${university}`
+      )
+    );
+  }
+
+  return res.json(
+    new ApiResponse(
+      200,
+      {
+        notes,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
+        university,
+      },
+      `Notes from ${university}`
+    )
+  );
 });
