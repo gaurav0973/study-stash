@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import Body from "./Body"
+import { LandingPage } from "./pages/LandingPage"
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
         <Route path="/login" element={<div>Login page</div>}/>
         <Route path="/signup" element={<div>Signup page</div>}/>
         <Route path="/" element={<Body/>}>
-          <Route path="/" element={<div>Landing page</div>}/>
+          <Route path="/" element={<LandingPage/>}/>
           <Route path="/feeds" element={<div>Feeds page</div>}/>
         </Route>
 
