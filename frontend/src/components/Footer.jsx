@@ -44,7 +44,7 @@ export const Footer = () => {
                         <h4 className="font-semibold text-white mb-4">Support</h4>
                         <ul className="space-y-2 text-sm">
                             <li>
-                                <Link to="/help" className="hover:text-white transition-colors">
+                                <Link to="/" className="hover:text-white transition-colors">
                                     Help Center
                                 </Link>
                             </li>
@@ -54,7 +54,7 @@ export const Footer = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/safety" className="hover:text-white transition-colors">
+                                <Link to="/" className="hover:text-white transition-colors">
                                     Safety
                                 </Link>
                             </li>
@@ -65,18 +65,13 @@ export const Footer = () => {
                         <h4 className="font-semibold text-white mb-4">Legal</h4>
                         <ul className="space-y-2 text-sm">
                             <li>
-                                <Link to="/privacy" className="hover:text-white transition-colors">
+                                <Link to="/" className="hover:text-white transition-colors">
                                     Privacy Policy
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/terms" className="hover:text-white transition-colors">
+                                <Link to="/" className="hover:text-white transition-colors">
                                     Terms of Service
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/cookies" className="hover:text-white transition-colors">
-                                    Cookie Policy
                                 </Link>
                             </li>
                         </ul>

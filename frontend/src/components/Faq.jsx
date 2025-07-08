@@ -4,6 +4,9 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
+import { ArrowRight } from "lucide-react";
 
 export const FAQList = [
     {
@@ -73,12 +76,14 @@ export const FAQ = () => {
                 <div className="text-center mt-10">
                     <h3 className="text-white font-medium">
                         Still have questions?{" "}
-                        <a
-                            href="#contact"
-                            className="text-blue-300 hover:text-blue-400 transition-colors"
-                        >
-                            Contact us
-                        </a>
+
+                        
+                        <Link to="/contact" className="ml-1 inline-flex items-center text-blue-300 hover:text-blue-400 transition-colors">
+                            
+                                Contact Us
+                                <ArrowRight className="ml-2 h-5 w-5" />
+
+                        </Link>
                     </h3>
                 </div>
             </div>
