@@ -12,7 +12,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { buttonVariants } from "./ui/button";
+import { buttonVariants } from "../ui/button";
 import { BookOpenIcon, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -79,7 +79,7 @@ export const Navbar = () => {
                                     </a>
                                 ))}
                                 <Link
-                                    to="/signin"
+                                    to="/login"
                                     onClick={() => setIsOpen(false)}
                                     className={buttonVariants({ variant: "ghost" })}
                                 >

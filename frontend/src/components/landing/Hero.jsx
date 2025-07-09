@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { Button, buttonVariants } from "./ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { ArrowRight, Search } from "lucide-react";
-import growth from "../assets/growth.png";
+import growth from "../../assets/growth.png"; 
 
 export const Hero = () => {
     return (

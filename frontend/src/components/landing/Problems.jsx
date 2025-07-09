@@ -1,5 +1,5 @@
 import { DollarSign, Shield, Users } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 const features = [
     {

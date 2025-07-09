@@ -7,7 +7,7 @@ import {
     Star,
     Upload,
 } from "lucide-react";
-import { Card, CardContent, CardHeader } from "./ui/card";
+import { Card, CardContent, CardHeader } from "../ui/card";
 
 export const Features = () => {
     return (

@@ -5,7 +5,6 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 
 export const FAQList = [
