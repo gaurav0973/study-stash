@@ -5,8 +5,7 @@ import { loginSchema } from "@/schemas/loginSchema"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { login } from "../store/slice/authSlice"
-
+import { login } from "@/store/slice/authSlice"
 import {
     Form,
     FormField,
@@ -25,13 +24,15 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { baseURL } from "@/lib/helper"
+import { useAuth } from "@/hooks/useAuth"
 
 export const LoginPage = () => {
 
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() ;
+    const navigate = useNavigate() ;
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
+
 
     const form = useForm({
         resolver: zodResolver(loginSchema),
@@ -50,8 +51,12 @@ export const LoginPage = () => {
                 },
                 withCredentials: true,
             })
-
-            dispatch(login({ userData: response.data.user }))
+            // console.log("Login response:", response.data)
+            form.reset()
+            dispatch(login({
+                userData: response.data
+            }))
+            console.log("User data:", response.data)
             navigate("/feeds")
         } catch (error) {
             form.setError("root", {
