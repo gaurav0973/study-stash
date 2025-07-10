@@ -7,5 +7,5 @@ export const PublicRoute = ({children}) => {
     if(isAuthenticated){
         return <Navigate to="/feeds" replace />;
     }
-    return children;
+    return children ;
 }
