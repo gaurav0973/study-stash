@@ -73,9 +73,8 @@ export const Navbar = () => {
                                 </Link>
                             </>
                         ) : (
-                            <Link to="/login" className={buttonVariants({ variant: "ghost" })}>
-                                Sign In
-                            </Link>
+                            <>
+                            </>
                         )
                     }
 
