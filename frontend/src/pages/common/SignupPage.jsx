@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { signupSchema } from "@/schemas/signupSchema"
 import axios from "axios"
-import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 // import { login } from "../store/slice/authSlice"
 
@@ -59,7 +58,7 @@ export const SignupPage = () => {
         setIsSubmitting(true)
         setFormSuccess(false)
         try {
-            const response = await axios.post(
+            await axios.post(
                 `${baseURL}/user/register`,
                 data,
                 {
@@ -71,7 +70,6 @@ export const SignupPage = () => {
             )
 
             setFormSuccess(true)
-            // dispatch(login({ userData: response.data.user }))
             form.reset()
             setPasswordStrength({ score: 0, label: "", color: "" })
             navigate("/login")
