@@ -9,10 +9,12 @@ import AllNotes from "./pages/AllNotes";
 import NotePreview from "./pages/NotePreview";
 import UploadNote from "./pages/UploadNote";
 import UserProfile from "./pages/user/UserProfile";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <BrowserRouter basename="/">
+      <Toaster/>
       <Routes>
         <Route
           path="/login"

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AllNotes = () => {
   const navigate = useNavigate();
@@ -11,13 +12,14 @@ const AllNotes = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const limit = 9;
+  const limit = 6;
 
+
+  
   useEffect(() => {
     const fetchNotes = async () => {
       setLoading(true);
       setError(null);
-
       try {
         let endpoint = "all";
         let params = `page=${page}&limit=${limit}`;
@@ -32,17 +34,17 @@ const AllNotes = () => {
           `http://localhost:8080/api/v1/note/${endpoint}?${params}`,
           { withCredentials: true }
         );
-
+        // console.log(res?.data?.data?.notes)
         setNotes(res?.data?.data?.notes || []);
         setTotalPages(res?.data?.data?.totalPages || 1);
         setLoading(false);
       } catch (err) {
         console.error("Error fetching notes:", err);
-        setError("Failed to load notes. Please try again.");
+        setError("Failed to load notes. Please try again.")
         setLoading(false);
+        toast.error("Failed to load notes. Please try again.");
       }
     };
-
     fetchNotes();
   }, [page, limit, searchQuery]);
 
@@ -53,9 +55,11 @@ const AllNotes = () => {
 
   return (
     <div className="p-6 max-w-6xl mx-auto bg-black text-white">
+      
+      {/* upper part */}
       <div className="mb-6 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold mb-2 text-white">
+          <h1 className="text-3xl font-bold mb-2 text-white ">
             📚 Study Materials
           </h1>
           <p className="text-gray-400">
@@ -84,7 +88,7 @@ const AllNotes = () => {
         </button>
       </div>
 
-      {/* Search Form */}
+      {/* Searching */}
       <div className="mb-8">
         <form onSubmit={handleSearch} className="flex gap-2">
           <input
@@ -117,10 +121,12 @@ const AllNotes = () => {
         </form>
       </div>
 
+
+    {/* Notes List */}
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-white"></div>
-          <p className="mt-4 text-gray-400">Loading notes...</p>
+          <p className="mt-4 text-gray-400">🔃Loading notes...</p>
         </div>
       ) : error ? (
         <div className="bg-red-900/20 text-red-400 border border-red-800 p-4 rounded-lg text-center">
@@ -148,7 +154,7 @@ const AllNotes = () => {
               d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
             ></path>
           </svg>
-          <p className="mt-4 text-xl text-gray-300">No notes available</p>
+          <p className="mt-4 text-xl text-gray-300">No notes available😔</p>
           <p className="text-gray-500">
             We couldn't find any notes matching your search.
           </p>
@@ -160,9 +166,9 @@ const AllNotes = () => {
               key={note._id}
               className="bg-zinc-900 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border border-zinc-800 text-white"
             >
-              {/* Document Preview Image - click to view details */}
+              {/*Preview Notes click to view details */}
               <div
-                className="h-40 bg-zinc-800 flex items-center justify-center cursor-pointer relative"
+                className="h-40 bg-zinc-800 flex items-center justify-center cursor-pointer relative "
                 onClick={() => navigate(`/notes/${note._id}`)}
               >
                 {note.fileUrl ? (

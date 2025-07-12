@@ -104,32 +104,32 @@ const UploadNote = () => {
   }
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
+    <div className="p-6 max-w-3xl mx-auto bg-black text-white">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">📝 Upload Study Material</h1>
-        <p className="text-gray-600">
+        <p className="text-gray-400">
           Share your knowledge with others by uploading your notes, study
           guides, or other educational materials
         </p>
       </div>
 
       {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start">
-          <AlertCircle className="text-red-500 mt-0.5 mr-2 h-5 w-5 flex-shrink-0" />
+        <div className="mb-6 p-4 bg-zinc-900 border border-zinc-700 rounded-lg flex items-start">
+          <AlertCircle className="text-white mt-0.5 mr-2 h-5 w-5 flex-shrink-0" />
           <div>
-            <h4 className="font-medium text-red-800">Upload Failed</h4>
-            <p className="text-red-700 text-sm">{error}</p>
+            <h4 className="font-medium text-white">Upload Failed</h4>
+            <p className="text-gray-400 text-sm">{error}</p>
           </div>
         </div>
       )}
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 border border-gray-200 dark:border-gray-700">
+      <div className="bg-zinc-900 rounded-xl shadow-md p-6 border border-zinc-800">
         <form onSubmit={handleSubmit}>
           <div className="space-y-6">
             <div className="space-y-1">
               <label
                 htmlFor="title"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium text-white"
               >
                 Title *
               </label>
@@ -148,7 +148,7 @@ const UploadNote = () => {
             <div className="space-y-1">
               <label
                 htmlFor="description"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium text-white"
               >
                 Description *
               </label>
@@ -160,14 +160,14 @@ const UploadNote = () => {
                 onChange={handleChange}
                 rows={4}
                 required
-                className="w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                className="w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-zinc-500 focus-visible:ring-zinc-500/50 focus-visible:ring-[3px] text-white"
               />
             </div>
 
             <div className="space-y-1">
               <label
                 htmlFor="price"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium text-white"
               >
                 Price (in USD) *
               </label>
@@ -183,7 +183,7 @@ const UploadNote = () => {
                 required
                 className="w-full"
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-400 mt-1">
                 Enter 0 for free materials
               </p>
             </div>
@@ -191,7 +191,7 @@ const UploadNote = () => {
             <div className="space-y-1">
               <label
                 htmlFor="file"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="block text-sm font-medium text-white"
               >
                 File Upload *
               </label>
@@ -199,15 +199,15 @@ const UploadNote = () => {
                 {!formData.file ? (
                   <label
                     htmlFor="file-upload"
-                    className="w-full flex flex-col items-center justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-800 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="w-full flex flex-col items-center justify-center border-2 border-zinc-700 border-dashed rounded-lg cursor-pointer bg-zinc-800 hover:bg-zinc-700"
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                      <Upload className="w-8 h-8 mb-2 text-gray-500 dark:text-gray-400" />
-                      <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <Upload className="w-8 h-8 mb-2 text-white" />
+                      <p className="mb-2 text-sm text-white">
                         <span className="font-semibold">Click to upload</span>{" "}
                         or drag and drop
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                      <p className="text-xs text-gray-400">
                         PDF, DOCX, PPT, or other document formats (max 100MB)
                       </p>
                     </div>
@@ -227,10 +227,14 @@ const UploadNote = () => {
             </div>
 
             <div className="pt-4">
-              <Button type="submit" disabled={loading} className="w-full">
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-white text-black hover:bg-gray-200"
+              >
                 {loading ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-b-transparent border-white mr-2"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-b-transparent border-black mr-2"></div>
                     Uploading...
                   </>
                 ) : (
@@ -245,9 +249,11 @@ const UploadNote = () => {
         </form>
       </div>
 
-      <div className="mt-8 text-gray-600 text-sm">
-        <h4 className="font-medium mb-2">📋 Upload Guidelines:</h4>
-        <ul className="list-disc pl-5 space-y-1">
+      <div className="mt-8 text-gray-400 text-sm bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+        <h4 className="font-medium mb-3 text-white border-b border-zinc-700 pb-2">
+          📋 Upload Guidelines:
+        </h4>
+        <ul className="list-disc pl-5 space-y-2">
           <li>Ensure your notes are original or properly cited</li>
           <li>Material should be educational and helpful for others</li>
           <li>PDF format is preferred for better compatibility</li>
