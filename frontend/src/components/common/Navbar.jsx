@@ -49,12 +49,9 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-border bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/90 backdrop-blur-md">
       <div className="container max-w-7xl mx-auto px-4 flex h-16 items-center justify-between">
-        <Link
-          to="/"
-          className="flex items-center text-xl font-bold text-foreground"
-        >
+        <Link to="/" className="flex items-center text-xl font-bold text-white">
           <BookOpenIcon className="mr-2 h-5 w-5" />
           Study Stash
         </Link>
@@ -65,7 +62,7 @@ export const Navbar = () => {
               <a
                 key={label}
                 href={href}
-                className="text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 hover:bg-muted/30"
+                className="text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 hover:bg-white/10 text-white"
               >
                 {label}
               </a>
@@ -73,19 +70,19 @@ export const Navbar = () => {
 
           {isAuthenticated ? (
             <>
-              <div className="px-3 py-2 text-sm font-semibold bg-gradient-to-r from-[#61DAFB] to-[#03a3d7] text-transparent bg-clip-text">
+              <div className="px-3 py-2 text-sm font-semibold text-white">
                 Welcome, {data?.user?.username || "User"}
               </div>
               <Link
                 to="/upload-note"
-                className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 hover:bg-muted/30"
+                className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 hover:bg-white/10 text-white"
               >
                 <Upload className="h-4 w-4" />
                 Upload Notes
               </Link>
               <Link
                 to="/profile"
-                className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 hover:bg-muted/30"
+                className="flex items-center gap-2 text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 hover:bg-white/10 text-white"
               >
                 <User className="h-4 w-4" />
                 Profile
@@ -122,7 +119,7 @@ export const Navbar = () => {
             </SheetTrigger>
             <SheetContent side="left">
               <SheetHeader>
-                <SheetTitle className="text-lg font-bold">
+                <SheetTitle className="text-lg font-bold text-white">
                   Study Stash
                 </SheetTitle>
               </SheetHeader>
@@ -133,7 +130,7 @@ export const Navbar = () => {
                       key={label}
                       href={href}
                       onClick={() => setIsOpen(false)}
-                      className="text-sm font-medium px-4 py-2 rounded-md hover:bg-muted/50 transition"
+                      className="text-sm font-medium px-4 py-2 rounded-md hover:bg-white/10 text-white transition"
                     >
                       {label}
                     </a>
@@ -141,13 +138,13 @@ export const Navbar = () => {
 
                 {isAuthenticated ? (
                   <>
-                    <div className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#61DAFB] to-[#03a3d7] text-transparent bg-clip-text">
+                    <div className="px-4 py-2 text-sm font-semibold text-white">
                       Welcome, {data?.user?.username || "User"}
                     </div>
                     <Link
                       to="/upload-note"
                       onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-md hover:bg-muted/50 transition"
+                      className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-md hover:bg-white/10 text-white transition"
                     >
                       <Upload className="h-4 w-4" />
                       Upload Notes
@@ -155,7 +152,7 @@ export const Navbar = () => {
                     <Link
                       to="/profile"
                       onClick={() => setIsOpen(false)}
-                      className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-md hover:bg-muted/50 transition"
+                      className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-md hover:bg-white/10 text-white transition"
                     >
                       <User className="h-4 w-4" />
                       Profile

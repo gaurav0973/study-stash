@@ -181,3 +181,32 @@ export const getNotesByUniversity = asyncHandler(async (req, res) => {
     )
   );
 });
+
+// Get notes uploaded by current user
+export const getUserNotes = asyncHandler(async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  const userId = req.user._id;
+
+  const notes = await Note.find({ uploadedBy: userId })
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+
+  const total = await Note.countDocuments({ uploadedBy: userId });
+
+  return res.json(
+    new ApiResponse(
+      200,
+      {
+        notes,
+        total,
+        page,
+        totalPages: Math.ceil(total / limit),
+      },
+      "User notes fetched successfully"
+    )
+  );
+});

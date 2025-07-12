@@ -91,3 +91,38 @@ export const logout = asyncHandler(async (req, res) => {
 
   return res.json(new ApiResponse(200, {}, "Logged out successfully"));
 });
+
+// update user profile
+export const updateUser = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const { username, university } = req.body;
+
+  // Validate data
+  if (!username && !university) {
+    throw new ApiError(400, "At least one field is required to update");
+  }
+
+  // Find and update the user
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      $set: {
+        username: username || req.user.username,
+        university: university || req.user.university,
+      },
+    },
+    { new: true }
+  ).select("-password");
+
+  if (!updatedUser) {
+    throw new ApiError(404, "User not found");
+  }
+
+  return res.json(
+    new ApiResponse(
+      200,
+      { user: updatedUser },
+      "User profile updated successfully"
+    )
+  );
+});
